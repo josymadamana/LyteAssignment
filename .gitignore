@@ -1,0 +1,12 @@
+*.log
+
+# Distribution / packaging
+venv/
+
+#PyCharm
+.idea/
+
+logs
+*.html
+.DS_Store
+__pycache__
