@@ -1,5 +1,5 @@
 {
-	"gpio_count": [
+	"gpio_high_toggle_count": [
       {"test_ids": ["JAMA001"], "cfg": {"angle": 360, "count": 1}},
       {"test_ids": ["JAMA002"], "cfg": {"angle": 540, "count": 2}}
     ],

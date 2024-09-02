@@ -1,7 +1,7 @@
 # LyteAssignment test framework setup
-
+- Clone the repo and cd to LyteAssignment
 - Install python 3.8 or newer
-- Setup Virtual env
+- setup Virtual env
 ```
 python3 -m venv venv
 source venv/bin/activate
@@ -14,8 +14,6 @@ pip install -r requirements.txt
 ```
 export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 ```
-
-
 - Run the test
 ```
 python3 -m pytest -vs tests/  --html=report.html --self-contained-html --json-report --json-report-file report.json

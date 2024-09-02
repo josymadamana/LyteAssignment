@@ -7,16 +7,16 @@ DEVICE_CONTROL_TOPIC = 'lyte/devicecontrol'
 
 class TestDUTStepper:
 
-    @pytest.mark.parametrize("stepper_gpio_high_count_args",
-                             get_config_args(file=STEPPER_TEST_CONFIG, config_name="gpio_count"))
-    def test_gpio_change_count_on_rotation(self, dut_monitor, dut_mqtt, stepper_gpio_high_count_args):
+    @pytest.mark.parametrize("parameters",
+                             get_config_args(file=STEPPER_TEST_CONFIG, config_name="gpio_high_toggle_count"))
+    def test_gpio_high_toggle_count_on_rotation(self, dut_monitor, dut_mqtt, parameters):
         """
         :param dut_monitor:
         :param dut_mqtt:
         :return:
         """
-        angle = stepper_gpio_high_count_args["angle"]
-        count = stepper_gpio_high_count_args["count"]
+        angle = parameters["angle"]
+        count = parameters["count"]
         logger.info(f"Test angle: {angle}, count: {count}")
 
         dut_monitor.start()
@@ -29,16 +29,16 @@ class TestDUTStepper:
         assert count == dut_monitor.gpio_high_toggle_count, \
             f"GPIO high toggle count {dut_monitor.gpio_high_toggle_count} is incorrect"
 
-    @pytest.mark.parametrize("stepper_gpio_status_args",
+    @pytest.mark.parametrize("parameters",
                              get_config_args(file=STEPPER_TEST_CONFIG, config_name="gpio_final_status"))
-    def test_gpio_final_status_after_rotation(self, dut_monitor, dut_mqtt, stepper_gpio_status_args):
+    def test_gpio_final_status_after_rotation(self, dut_monitor, dut_mqtt, parameters):
         """
         :param dut_monitor:
         :param dut_mqtt:
         :return:
         """
-        angle = stepper_gpio_status_args["angle"]
-        status = stepper_gpio_status_args["status"]
+        angle = parameters["angle"]
+        status = parameters["status"]
         logger.info(f"Test angle: {angle}, status: {status}")
 
         # Start Arduino monitoring here
