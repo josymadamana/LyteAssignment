@@ -1,5 +1,4 @@
 import logging
-import json
 import pytest
 from config.test import STEPPER_TEST_CONFIG, get_config_args
 logger = logging.getLogger("LyteProject")
@@ -40,7 +39,7 @@ class TestDUTStepper:
         """
         angle = stepper_gpio_status_args["angle"]
         status = stepper_gpio_status_args["status"]
-        logger.info(f"Test angle: {angle}, count: {status}")
+        logger.info(f"Test angle: {angle}, status: {status}")
 
         # Start Arduino monitoring here
         response = dut_mqtt.send_mqtt_request(topic=DEVICE_CONTROL_TOPIC,
