@@ -28,6 +28,7 @@ class Arduino:
             self.arduino.open()
         except serial.SerialException as e:
             logger.error(f"Error opening Arduino serial port: {self.arduino.port}{e}")
+            raise f"Error opening Arduino serial port: {self.arduino.port}{e}"
 
     def uninitialize(self):
         """Un-initialize arduino connection.
