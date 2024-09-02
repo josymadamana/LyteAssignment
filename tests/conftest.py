@@ -17,6 +17,19 @@ def pytest_addoption(parser):
                      help="IP address of the device under test"),
     parser.addoption("--arduino_port", action='store',
                      default="/dev/ttyUSB0", help="Arduino UNO port")
+    parser.addoption('--repeat', action='store',
+                     help='Number of times to repeat each test')
+
+def pytest_generate_tests(metafunc):
+    if metafunc.config.option.repeat is not None:
+        count = int(metafunc.config.option.repeat)
+
+        # Add a new fixture 'repeat_test'
+        metafunc.fixturenames.append('repeat_test')
+
+        # Parametrize the tests with 'repeat_test' fixture
+        # @pytest.mark.parametrize('repeat_test', range(count))
+        metafunc.parametrize('repeat_test', range(count))
 
 def arduino_port(request):
     """Read arduino port from pytest parameters.
