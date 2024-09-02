@@ -1,13 +1,10 @@
 {
 	"gpio_count": [
       {"test_ids": ["JAMA001"], "cfg": {"angle": 360, "count": 1}},
-      {"test_ids": ["JAMA002"], "cfg": {"angle": 541, "count": 2}}
+      {"test_ids": ["JAMA002"], "cfg": {"angle": 540, "count": 2}}
     ],
     "gpio_final_status": [
-      {"test_ids": ["JAMA003"], "cfg": {"angle": 360, "status": 0}},
-      {"test_ids": ["JAMA004"], "cfg": {"angle": 541, "status": 1}}
+      {"test_ids": ["JAMA003"], "cfg": {"angle": 180, "status": 1}},
+      {"test_ids": ["JAMA004"], "cfg": {"angle": 539, "status": 0}}
     ]
 }
-
-
-
