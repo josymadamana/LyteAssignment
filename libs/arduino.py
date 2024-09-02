@@ -4,6 +4,7 @@
 import logging
 import serial
 import os
+import time
 logger = logging.getLogger("LyteProject")
 STX_BYTE = 0x02  # Byte representing the Start Byte of data transmission
 
@@ -16,6 +17,7 @@ class Arduino:
         """
         # DTR reset patch
         os.system(f"sudo stty -F {port} -hupcl")
+        time.sleep(2)
         self.arduino = serial.Serial()
         self.arduino.baudrate = baudrate
         self.arduino.port = port
