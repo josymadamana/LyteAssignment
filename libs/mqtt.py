@@ -72,5 +72,5 @@ class MqttClient:
 
 if __name__ == '__main__':
     mqtt_client = MqttClient(host="127.0.0.1", port=1883)
-    mqtt_client.send_mqtt_request(topic='lyte/devicecontrol', msg='{"device":"stepper", "value":360}', timeout=60)
+    mqtt_client.send_mqtt_request(topic='lyte/devicecontrol', msg='{"device":"stepper", "value":360}', timeout_s=60)
     mqtt_client.disconnect()

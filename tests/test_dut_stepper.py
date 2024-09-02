@@ -1,26 +1,15 @@
 import logging
 import json
 import pytest
-from config.test import STEPPER_TEST_CONFIG
+from config.test import STEPPER_TEST_CONFIG, get_config_args
 logger = logging.getLogger("LyteProject")
 DEVICE_CONTROL_TOPIC = 'lyte/devicecontrol'
 
-with open(STEPPER_TEST_CONFIG) as f:
-    stepper_test_config = json.load(f)
-
-gpio_high_count_cfg = [
-    pytest.param(cfg["cfg"], marks=pytest.mark.JAMA(*cfg["test_ids"]))
-    for cfg in stepper_test_config["gpio_count"]
-]
-
-gpio_status_cfg = [
-    pytest.param(cfg["cfg"], marks=pytest.mark.JAMA(*cfg["test_ids"]))
-    for cfg in stepper_test_config["gpio_final_status"]
-]
 
 class TestDUTStepper:
 
-    @pytest.mark.parametrize("stepper_gpio_high_count_args", gpio_high_count_cfg)
+    @pytest.mark.parametrize("stepper_gpio_high_count_args",
+                             get_config_args(file=STEPPER_TEST_CONFIG, config_name="gpio_count"))
     def test_gpio_change_count_on_rotation(self, dut_monitor, dut_mqtt, stepper_gpio_high_count_args):
         """
         :param dut_monitor:
@@ -41,7 +30,8 @@ class TestDUTStepper:
         assert count == dut_monitor.gpio_high_toggle_count, \
             f"GPIO high toggle count {dut_monitor.gpio_high_toggle_count} is incorrect"
 
-    @pytest.mark.parametrize("stepper_gpio_status_args", gpio_status_cfg)
+    @pytest.mark.parametrize("stepper_gpio_status_args",
+                             get_config_args(file=STEPPER_TEST_CONFIG, config_name="gpio_final_status"))
     def test_gpio_final_status_after_rotation(self, dut_monitor, dut_mqtt, stepper_gpio_status_args):
         """
         :param dut_monitor:

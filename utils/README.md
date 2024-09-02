@@ -1,6 +1,7 @@
 
 # DUT
-- DUT is started as a service
+- DUT is started as a service. Ensure the service "lytedut.service" 
+with the below details is running.
 ```
 [Unit]
 Description=Lyte DUT sim
@@ -14,6 +15,11 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+- Install MQTT broker
+
+    Refer: https://mosquitto.org/blog/2013/01/mosquitto-debian-repository/
+
+
 - To run DUT manually; just run
 ```
 /home/lyte/work/LyteAssignment/utils/run_dut.sh
@@ -22,12 +28,7 @@ WantedBy=multi-user.target
 ```
 systemctl status lytedut.service
 ```
-- Sample Command to control DUT
-```
-# msg='{"device":"led", "value":1}'
-msg='{"device":"stepper", "value":360}'
-mosquitto_pub -t lyte/devicecontrol -m $msg
-```
 
 # ARDUINO
-To use a new Arduino UNO; download the sketch "arduino_sketch.ino" to the UNO board
+To use a new Arduino UNO; download the sketch "arduino_sketch.ino" from the 
+directory "arduino_sketch" to the UNO board and connect the board to the PI via USB jack.

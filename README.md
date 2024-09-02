@@ -10,7 +10,13 @@ source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-To run the test
+- Set PYTHONPATH
 ```
-python3 -m pytest -vs tests/   --html=report.html --self-contained-html --json-report --json-report-file report.json
+export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+```
+
+
+- Run the test
+```
+python3 -m pytest -vs tests/  --html=report.html --self-contained-html --json-report --json-report-file report.json
 ```
