@@ -3,7 +3,7 @@
 - Install python 3.8 or newer
 - Setup Virtual env
 ```
-python3 -m venv
+python3 -m venv venv
 source venv/bin/activate
 ```
 - Install requirements

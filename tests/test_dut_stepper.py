@@ -20,15 +20,15 @@ gpio_status_cfg = [
 
 class TestDUTStepper:
 
-    @pytest.mark.parametrize("stepper_count_args", gpio_high_count_cfg)
-    def test_gpio_change_count_on_rotation(self, dut_monitor, dut_mqtt, stepper_count_args):
+    @pytest.mark.parametrize("stepper_gpio_high_count_args", gpio_high_count_cfg)
+    def test_gpio_change_count_on_rotation(self, dut_monitor, dut_mqtt, stepper_gpio_high_count_args):
         """
         :param dut_monitor:
         :param dut_mqtt:
         :return:
         """
-        angle = stepper_count_args["angle"]
-        count = stepper_count_args["count"]
+        angle = stepper_gpio_high_count_args["angle"]
+        count = stepper_gpio_high_count_args["count"]
         logger.info(f"Test angle: {angle}, count: {count}")
 
         dut_monitor.start()
