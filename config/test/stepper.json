@@ -1,10 +1,10 @@
 {
-	"gpio_high_toggle_count": [
-      {"test_ids": ["JAMA001"], "cfg": {"angle": 360, "count": 1}},
-      {"test_ids": ["JAMA002"], "cfg": {"angle": 540, "count": 2}}
-    ],
-    "gpio_final_status": [
-      {"test_ids": ["JAMA003"], "cfg": {"angle": 180, "status": 1}},
-      {"test_ids": ["JAMA004"], "cfg": {"angle": 539, "status": 0}}
-    ]
+  "gpio_high_toggle_count": [
+    {"test_ids": ["JAMA001"], "cfg": {"angle": 360, "count": 1}},
+    {"test_ids": ["JAMA002"], "cfg": {"angle": 540, "count": 2}}
+  ],
+  "gpio_final_status": [
+    {"test_ids": ["JAMA003"], "cfg": {"angle": 180, "status": 1}},
+    {"test_ids": ["JAMA004"], "cfg": {"angle": 539, "status": 0}}
+  ]
 }

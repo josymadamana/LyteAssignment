@@ -26,7 +26,9 @@ degree_to_step = 5.625 / 64  # as per the specs
 
 class Stepper:
     def __init__(self):
-        # setting up
+        """Stepper class init.
+        """
+        # setting up all pins.
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(in1, GPIO.OUT)
         GPIO.setup(in2, GPIO.OUT)
@@ -38,6 +40,9 @@ class Stepper:
         self.initialize()
 
     def initialize(self):
+        """Initialize all stepper control pins and DUT GPIO.
+        :return:
+        """
         GPIO.output(in1, GPIO.LOW)
         GPIO.output(in2, GPIO.LOW)
         GPIO.output(in3, GPIO.LOW)
@@ -46,6 +51,8 @@ class Stepper:
         self.motor_step_counter = 0
 
     def __del__(self):
+        """Stepper destructor to get all pins to low.
+        """
         GPIO.output(in1, GPIO.LOW)
         GPIO.output(in2, GPIO.LOW)
         GPIO.output(in3, GPIO.LOW)
@@ -54,9 +61,16 @@ class Stepper:
         GPIO.cleanup()
 
     def disconnect(self):
+        """Stepper disconnect method to call destructor.
+        """
         self.__del__()
 
     def move_at_angle_with_gpio_toggle(self, angle_in_degree=360, direction=False):
+        """Method to perform the stepper motion and GPIO toggle.
+        :param angle_in_degree: Angle to move stepper in degrees.
+        :param direction: False-Clockwise, True-Anti-Clockwise.
+        :return: Bool
+        """
         try:
             GPIO.output(GPIO_TRIGGER_180, GPIO.LOW)
             i = 0
