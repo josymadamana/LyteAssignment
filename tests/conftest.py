@@ -20,17 +20,6 @@ def pytest_addoption(parser):
     parser.addoption('--repeat', action='store',
                      help='Number of times to repeat each test')
 
-def pytest_generate_tests(metafunc):
-    if metafunc.config.option.repeat is not None:
-        count = int(metafunc.config.option.repeat)
-
-        # Add a new fixture 'repeat_test'
-        metafunc.fixturenames.append('repeat_test')
-
-        # Parametrize the tests with 'repeat_test' fixture
-        # @pytest.mark.parametrize('repeat_test', range(count))
-        metafunc.parametrize('repeat_test', range(count))
-
 def arduino_port(request):
     """Read arduino port from pytest parameters.
     :param request:
@@ -55,7 +44,6 @@ def dut_monitor(request):
     """
     logger.info(f"arduino_port: {arduino_port(request)}")
     return DUTMonitor(arduino_port=arduino_port(request))
-    return
 
 @pytest.fixture(scope="module")
 def dut_mqtt(request):
@@ -66,11 +54,26 @@ def dut_mqtt(request):
     logger.info(f"dut_ip: {dut_ip(request)}")
     return MqttClient(host=dut_ip(request), port=1883)
 
+def pytest_generate_tests(metafunc):
+    """capability to repeat test execution.
+    :param metafunc:
+    :return:
+    """
+    if metafunc.config.option.repeat is not None:
+        count = int(metafunc.config.option.repeat)
+
+        # Add a new fixture 'repeat_test'
+        metafunc.fixturenames.append('repeat_test')
+
+        # Parametrize the tests with 'repeat_test' fixture
+        # @pytest.mark.parametrize('repeat_test', range(count))
+        metafunc.parametrize('repeat_test', range(count))
 
 def pytest_sessionstart(session):
-    """This is Called after the Session object has been created and
+    """Called after the Session object has been created and
     before performing collection and entering the run test loop.
-    Can be used to upgrade the DUT and ensure it is in good state before test execution.
+    Can be used to upgrade the DUT and ensure it is in good
+    state before test execution.
     """
     os.system("sudo /usr/bin/systemctl restart lytedut.service")
     time.sleep(5)
