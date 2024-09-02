@@ -12,8 +12,7 @@ class DUTMonitor(Thread):
 
     """
     def __init__(self, arduino_port="/dev/ttyUSB0", baudrate=115200):
-        """
-
+        """Initialize DUT monitor class.
         :param baudrate: Arduino baudrate
         :param arduino_port:
         """
@@ -22,17 +21,16 @@ class DUTMonitor(Thread):
         self.gpio_high_toggle_count = 0
         self._stop_event = Event()
 
-    def run(self, timeout=300):
-        """
-
-        :param prev_value:
+    def run(self, timeout_s=300):
+        """Thread main method.
+        :param timeout_s: Initial pin status to 0 timeout in seconds
         :return:
         """
         # self.dut_monitor_running = True
         logger.info(f"Monitor thread started")
         self.gpio_high_toggle_count = 0
         start_time = time.time()
-        while self.arduino.read_pin_13() != 0 and time.time() - start_time < timeout:
+        while self.arduino.read_pin_13() != 0 and time.time() - start_time < timeout_s:
             time.sleep(0.1)
             logger.info(f"reading arduino pin value: {self.arduino.read_pin_13()} until it is 0")
         prev_value = self.arduino.read_pin_13()
@@ -50,12 +48,14 @@ class DUTMonitor(Thread):
         logger.info(f"Monitor thread completed")
 
     def stop(self):
+        """Stop the thread by setting event.
+        :return:
+        """
         self._stop_event.set()
 
     def read_gpio_status(self):
-        """
-
-        :return:
+        """Read the GPIO pin status.
+        :return: GPIO pin status read from Arduino(0/1)
         """
         return self.arduino.read_pin_13()
 

@@ -5,10 +5,13 @@ logger = logging.getLogger("LyteProject")
 from paho.mqtt import client as mqtt_client
 
 class MqttClient:
-    """
-
+    """MQTT client lib.
     """
     def __init__(self, host="127.0.0.1", port=1883):
+        """DUT in intialize.
+        :param host: Broker hostname
+        :param port: Broker port
+        """
         self.host = host
         self.port = port
         # Generate a Client ID with the publish prefix.
@@ -19,8 +22,7 @@ class MqttClient:
         self.topic_response = None
 
     def connect_mqtt(self):
-        """
-
+        """Connect to broker.
         :return:
         """
         def on_connect(client, userdata, flags, rc):
